@@ -1,17 +1,20 @@
 package com.vgubert.listlesson.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.vgubert.listlesson.R
 import com.vgubert.listlesson.model.UserModel
 import kotlinx.android.synthetic.main.item_user_layout.view.*
 
-class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val context: Context): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var userList = emptyList<UserModel>()
+
 
     class UserViewHolder(view: View): RecyclerView.ViewHolder(view)
 
@@ -23,6 +26,9 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.itemView.tv_last_name.text = userList[position].lastName
         holder.itemView.tv_first_name.text = userList[position].firstName
+        holder.itemView.setOnClickListener {
+            Toast.makeText(context,"$position", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
